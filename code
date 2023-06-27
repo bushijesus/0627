@@ -1,0 +1,88 @@
+//
+// Created by Administrator on 2023/6/27.
+//
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+//#define CLASSNUMS 3
+//typedef struct t_info {
+//    int clasno;
+//    int student_id;
+//    float score[5];
+//} stStuInfo;
+//
+//void read_data(float students[][100][5], int class[], stStuInfo studentinfo[]) {
+//    int n = 0;
+//    int i = 0;
+//    int j = 0;
+//    studentinfo[1].score[3] = 10000;          // 最差成绩
+//    for (i = 0; i < CLASSNUMS; ++i) {
+//        printf("请输入第%d班的人数:\n", i + 1);
+//        scanf("%d", &n);
+//        class[i] = n;
+//        for (j = 0; j < n; ++j) {
+//            printf("请输入第%d班第%d个人的三科成绩:\n", i + 1, j + 1);
+//            /*
+//                for(k = 0;k<3;k++){
+//                scanf("%f",&students[i][j][k]);
+//            }
+//            */
+//            scanf("%f%f%f", &students[i][j][0], &students[i][j][1], &students[i][j][2]);
+//            students[i][j][3] = students[i][j][0] + students[i][j][1] + students[i][j][2];    // 总分
+//            students[i][j][4] = students[i][j][3] / 3;                                        // 平均分
+//            if (students[i][j][3] > studentinfo[0].score[3]) {
+//                studentinfo[0].clasno = i;
+//                studentinfo[0].student_id = j;
+//                memcpy(studentinfo[0].score, students[i][j], sizeof(float) * 5);
+//            }
+//            if (students[i][j][3] < studentinfo[1].score[3]) {
+//                studentinfo[1].clasno = i;
+//                studentinfo[1].student_id = j;
+//                memcpy(studentinfo[1].score, students[i][j], sizeof(float) * 5);
+//            }
+//        }
+//    }
+//}
+//
+//int main() {
+//    float students[CLASSNUMS][100][5] = {0};
+//    int class[CLASSNUMS] = {0};
+//    stStuInfo studentinfo[2] = {0};
+//    read_data(students, class, studentinfo);
+//    printf("最好的学生序号是%d,%d班，平均成绩是：%6.2f", studentinfo[0].student_id, studentinfo[0].clasno, studentinfo[0].score[4]);
+//    printf("最差的学生序号是%d,%d班，平均成绩是：%6.2f", studentinfo[1].student_id, studentinfo[1].clasno, studentinfo[1].score[4]);
+//
+//    char atr[2][20] = {0};
+//    char (*p)[] = NULL;
+//}
+
+void merge(int arr[], int L, int M, int R){
+    int * res = (int *)malloc((R - L + 1) * sizeof (int));
+    int i = 0;
+    int p1 = L;
+    int p2 = M + 1;
+    while (p1 <= M && p2 <= R){
+        res[i++] = arr[p1] <= arr[p2] ? arr[p1++] : arr[p2++];
+    }
+    while (p1 <= M){
+        res[i++] = arr[p1++];
+    }
+    while (p2 <= R){
+        res[i++] = arr[p2++];
+    }
+}
+
+void process(int arr[], int L, int R){
+    if(L == R)
+        return ;
+    int mid = L + ((R - L) >> 1);
+    process(arr, L, mid);
+    process(arr, mid + 1, R);
+    merge(arr, L, mid, R);
+}
+int main()
+{
+    int arr[10] = {1,5,2,6,4,8,9,3,5,8};
+}
